@@ -21,6 +21,15 @@ document.getElementById("email").innerHTML =
 document.getElementById("phone").innerHTML =
 "Phone: " + data.contact.phone;
 
+/* Show result box */
+let resultBox = document.querySelector(".result");
+resultBox.style.display = "block";
+
+/* Small delay for smooth fade */
+setTimeout(() => {
+    resultBox.style.opacity = "1";
+}, 50);
+
 })
 .catch(error=>{
 console.log(error);
