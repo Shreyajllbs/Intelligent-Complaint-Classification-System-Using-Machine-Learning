@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Intelligent Complaint System</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="overlay">
+  <div class="card">
+    <h1>Complaint Classification System</h1>
+    <p>Submit your complaint and get directed instantly</p>
+
+    <textarea id="complaint" placeholder="Enter your complaint here..."></textarea>
+    <button onclick="sendComplaint()">Submit</button>
+
+    <div class="result">
+      <h3 id="category"></h3>
+      <p id="email"></p>
+      <p id="phone"></p>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
