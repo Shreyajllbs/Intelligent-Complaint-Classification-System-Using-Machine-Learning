@@ -4,10 +4,10 @@ from sklearn.naive_bayes import MultinomialNB
 import pickle
 import os
 
-data = pd.read_csv("dataset/complaints.csv")
+data = pd.read_csv("dataset/datasetnew.csv")
 
-X = data["reports"]      # complaint text
-y = data["GENRE"]        # category
+X = data["Reports"]      # complaint text
+y = data["Genre"]        # category
 
 vectorizer = TfidfVectorizer(stop_words="english")
 X_vec = vectorizer.fit_transform(X)
