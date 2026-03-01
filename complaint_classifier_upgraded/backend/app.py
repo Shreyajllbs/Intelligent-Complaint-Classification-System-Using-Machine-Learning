@@ -9,28 +9,59 @@ model = pickle.load(open("model/classifier.pkl","rb"))
 vectorizer = pickle.load(open("model/vectorizer.pkl","rb"))
 
 contacts = {
- "Food and Canteen Issues":{"email":"canteen@college.edu","phone":"9876543210"},
- "Housing and Transportation":{"email":"transport@college.edu","phone":"9876543220"},
- "Online Learning":{"email":"elearning@college.edu","phone":"9876543250"},
- "Career Opportunities":{"email":"placement@college.edu","phone":"9876543230"},
- "Financial Support":{"email":"finance@college.edu","phone":"9876543240"},
- "Health and Well-being Support":{"email":"health@college.edu","phone":"9876543260"},
- "Academic Support and Resources":{"email":"academic@college.edu","phone":"9876543270"},
- "Athletics and Sports":{"email":"sports@college.edu","phone":"9876543280"}
+    "Food and Cantines":{
+        "email":"principal@lbsitw.ac.in",
+        "phone":" +91 471 2353831 , +91 471 2353720",
+        "image":"images/canteen.jpg"
+    },
+    "Career opportunities":{
+        "email":"cgpu@lbsitw.ac.in",
+        "phone":"+91 471 2349262.",
+        "image":"images/career1.jpg"
+    },
+    "Health and Well-being Support":{
+        "email":"principal@lbsitw.ac.in",
+        "phone":" +91 471 2353831",
+        "image":"images/health.jpg"
+    },
+    "Academic Support and Resources":{
+        "email":"principal@lbsitw.ac.in",
+        "phone":" +91 471 2353831 , +91 471 2353720.",
+        "image":"images/academic.jpg"
+    },
+    "Hostel":{
+        "email":"hostel.lbsitw@gmail.com , hostellbsitw@lbsitw.ac.in",
+        "phone":" 9745527664 , 9048546474",
+        "image":"images/hostel1.jpg"
+    },
+    "Athletics and sports":{
+        "email":"sports@college.edu",
+        "phone":"9876543280",
+        "image":"images/sports.jpg"
+    }
 }
 
 @app.route("/")
 def home():
     return "Backend is running successfully"
+
 @app.route("/predict", methods=["POST"])
 def predict():
     text = request.json["complaint"]
     vect = vectorizer.transform([text])
     result = model.predict(vect)[0]
 
+    data = contacts.get(result, {
+        "email":"Not Available",
+        "phone":"Not Available",
+        "image":""
+    })
+
     return jsonify({
         "category": result,
-        "contact": contacts.get(result, {"email":"Not Available","phone":"Not Available"})
+        "email": data["email"],
+        "phone": data["phone"],
+        "image": data["image"]
     })
 
 if __name__ == "__main__":
