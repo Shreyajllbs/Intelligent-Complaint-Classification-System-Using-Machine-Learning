@@ -12,7 +12,6 @@ function sendComplaint() {
     .then(response => response.json())
     .then(data => {
 
-        // SAVE EVERYTHING FROM BACKEND
         localStorage.setItem("category", data.category);
         localStorage.setItem("email", data.email);
         localStorage.setItem("phone", data.phone);
@@ -26,58 +25,129 @@ function sendComplaint() {
     });
 }
 
+
 // ================= RESULT PAGE =================
 
 window.onload = function () {
 
-    if (window.location.pathname.includes("result.html")) {
+    if (!window.location.pathname.includes("result.html")) return;
 
-        let category = localStorage.getItem("category");
-        let email = localStorage.getItem("email");
-        let phone = localStorage.getItem("phone");
-        let image = localStorage.getItem("image");
+    // ---------- STATIC DATA FOR NAVBAR PAGES ----------
+    const categoryData = {
 
-        if (!category) return;
+        "Academic Support and Resources": {
+            description: "This category includes complaints related to teaching, examinations, laboratories, library services, classroom infrastructure, and study materials.",
+            email: "principal@lbsitw.ac.in",
+            phone: "+91 471 2353831 , +91 471 2353720",
+            image: "images/academic.jpg"
+        },
 
-        // CATEGORY
-        document.getElementById("predictedCategory").innerHTML =
-            "Predicted Category: " + category;
+        "Athletics and Sports": {
+            description: "This category includes complaints related to sports facilities, training, equipment, and athletic activities.",
+            email: "principal@lbsitw.ac.in",
+            phone: "+91 471 2353831 , +91 471 2353720",
+            image: "images/sports.jpg"
+        },
 
-        // CONTACT
-        document.getElementById("email").innerHTML =
-            "Email: " + email;
+        "Career Opportunities": {
+            description: "This category addresses grievances related to placements, internships, workshops, training programs, and career guidance.",
+            email: "principal@lbsitw.ac.in",
+            phone: "+91 471 2353831 , +91 471 2353720",
+            image: "images/career.jpg"
+        },
 
-        document.getElementById("phone").innerHTML =
-            "Phone: " + phone;
+        "Health and Well-being Support": {
+            description: "This category covers medical facilities, hygiene, sanitation, emergency care, and mental health support available on campus.",
+            email: "principal@lbsitw.ac.in",
+            phone: "+91 471 2353831 , +91 471 2353720",
+            image: "images/health.jpg"
+        },
 
-        // DESCRIPTIONS
-        let descriptions = {
+        "Food and Canteen Issues": {
+            description: "This category focuses on food quality, hygiene, pricing, and service efficiency of the campus canteen.",
+            email: "principal@lbsitw.ac.in",
+            phone: "+91 471 2353831 , +91 471 2353720",
+            image: "images/canteen.jpg"
+        },
 
-            "Academic Support and Resources":
-            "This category includes complaints related to teaching, examinations, laboratories, library services, classroom infrastructure, and study materials.",
+        "Hostel Issues": {
+            description: "This category includes complaints regarding hostel accommodation, maintenance, water supply, electricity, and security.",
+            email: "principal@lbsitw.ac.in",
+            phone: "+91 471 2353831 , +91 471 2353720",
+            image: "images/hostel.jpg"
+        }
+    };
 
-            "Athletics and Sports":
-            "This category includes complaints related to sports facilities, training, equipment, and athletic activities.",
+    // CHECK IF COMING FROM NAVBAR (URL PARAMETER)
+    const urlParams = new URLSearchParams(window.location.search);
+    const navCategory = urlParams.get("category");
 
-            "Career Opportunities":
-            "This category addresses grievances related to placements, internships, workshops, training programs, and career guidance.",
+    let category, email, phone, image;
 
-            "Health and Well-being Support":
-            "This category covers medical facilities, hygiene, sanitation, emergency care, and mental health support available on campus.",
+    // ===============================
+    // IF CLICKED FROM NAVBAR
+    // ===============================
+    if (navCategory) {
 
-            "Food and Canteen Issues":
-            "This category focuses on food quality, hygiene, pricing, and service efficiency of the campus canteen.",
+        category = navCategory;
 
-            "Hostel Issues":
-            "This category includes complaints regarding hostel accommodation, maintenance, water supply, electricity, and security."
-        };
+        if (!categoryData[category]) return;
+
+        document.getElementById("predictedCategory").innerHTML = category; // ❌ No "Predicted Category:"
 
         document.getElementById("descriptionText").innerHTML =
-            descriptions[category] || "Description not available.";
+            categoryData[category].description;
 
-        // IMAGE FROM BACKEND
-        if (image) {
-            document.getElementById("categoryImage").src = image;
-        }
+        document.getElementById("email").innerHTML =
+            "Email: " + categoryData[category].email;
+
+        document.getElementById("phone").innerHTML =
+            "Phone: " + categoryData[category].phone;
+
+        document.getElementById("categoryImage").src =
+            categoryData[category].image;
+
+        return;
     }
+
+    // ===============================
+    // IF COMING FROM PREDICTION
+    // ===============================
+    category = localStorage.getItem("category");
+
+    if (category === "Athletics and sports") {
+        category = "Athletics and Sports";
+    }
+
+    if (category === "Food and Canteen") {
+        category = "Food and Canteen Issues";
+    }
+
+    if (category === "Career opportunities") {
+        category = "Career Opportunities";
+    }
+
+    if (category === "Hostel") {
+        category = "Hostel Issues";
+    }
+
+    if (!category) {
+        console.log("No category from backend");
+        return;
+    }
+
+    document.getElementById("predictedCategory").innerHTML =
+        "Predicted Category: " + category;
+
+    document.getElementById("descriptionText").innerHTML =
+        categoryData[category].description;
+
+    document.getElementById("email").innerHTML =
+    "Email: " + categoryData[category].email;
+
+    document.getElementById("phone").innerHTML =
+        "Phone: " + categoryData[category].phone;
+
+    document.getElementById("categoryImage").src =
+        categoryData[category].image;
 };
