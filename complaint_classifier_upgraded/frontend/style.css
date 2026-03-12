@@ -7,12 +7,16 @@
 body {
   font-family: 'Segoe UI', sans-serif;
   min-height: 100vh;
+  padding-top: 90px;
+}
 
-  background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #203a43);
-  background-size: 400% 400%;
-  animation: gradientMove 10s ease infinite;
-
-  padding-top: 90px;   /* prevents navbar overlap */
+/* Background ONLY for home page */
+.home-page {
+  background-image: url("bg.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 @keyframes gradientMove {
@@ -30,20 +34,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: -70px; 
 }
 
 /* Glass Card */
 .card {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(18px);
+  background: rgba(255, 255, 255, 0.9); /* solid white */
+  backdrop-filter: blur(10px);
+
   padding: 45px;
   border-radius: 25px;
   width: 450px;
   max-width: 95%;
   text-align: center;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-  color: white;
-  transition: all 0.3s ease;
+  color: black;
 }
 
 .card:hover {
@@ -70,18 +75,20 @@ textarea {
   height: 120px;
   padding: 15px;
   border-radius: 14px;
-  border: none;
+  border: 1px solid #ccc;
   outline: none;
   font-size: 14px;
   resize: none;
   margin-top: 10px;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
+
+  background: white;   /* textbox background */
+  color: black;        /* text color */
+
   transition: 0.3s ease;
 }
 
 textarea::placeholder {
-  color: rgba(255, 255, 255, 0.7);
+  color: #777;
 }
 
 textarea:focus {
@@ -196,10 +203,30 @@ button:hover {
 
 /* ===================== RESULT PAGE FINAL DESIGN ===================== */
 
+/* RESULT PAGE BACKGROUND */
+.result-bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 .result-page {
   width: 90%;
   max-width: 1200px;
   margin: auto;
+
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+
+  padding: 40px;
+  border-radius: 20px;
+}
+.result-page h1,
+.result-page h2,
+.result-page h3,
+.result-page p,
+.result-page a {
+  color: white;
 }
 
 /* 🔴 Top Category */
@@ -216,9 +243,8 @@ button:hover {
 /* 🟡 Main Content Layout */
 .main-content {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 60px;
+  justify-content: center;
+  align-items: center;
 }
 
 /* LEFT SIDE */
@@ -289,3 +315,27 @@ button:hover {
     width: 100%;
   }
 } 
+
+.hero-text{
+  text-align: center;
+  color: white;
+  margin-top: 40px;
+}
+
+.hero-text h1{
+  font-size: 45px;
+  margin-bottom: 10px;
+  text-shadow:
+    2px 2px 5px rgba(0,0,0,0.7),
+    4px 4px 10px rgba(0,0,0,0.6),
+    6px 6px 15px rgba(0,0,0,0.5);
+}
+
+.hero-text p{
+  font-size: 20px;
+  opacity: 0.9;
+  text-shadow:
+    4px 4px 5px rgba(0,0,0,0.7),
+    4px 4px 10px rgba(0,0,0,0.6),
+    6px 6px 15px rgba(0,0,0,0.5);
+}

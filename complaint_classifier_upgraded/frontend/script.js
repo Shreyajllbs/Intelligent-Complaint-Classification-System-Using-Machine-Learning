@@ -13,9 +13,6 @@ function sendComplaint() {
     .then(data => {
 
         localStorage.setItem("category", data.category);
-        localStorage.setItem("email", data.email);
-        localStorage.setItem("phone", data.phone);
-        localStorage.setItem("image", data.image);
 
         window.location.href = "result.html";
     })
@@ -32,7 +29,6 @@ window.onload = function () {
 
     if (!window.location.pathname.includes("result.html")) return;
 
-    // ---------- STATIC DATA FOR NAVBAR PAGES ----------
     const categoryData = {
 
         "Academic Support and Resources": {
@@ -78,22 +74,22 @@ window.onload = function () {
         }
     };
 
-    // CHECK IF COMING FROM NAVBAR (URL PARAMETER)
     const urlParams = new URLSearchParams(window.location.search);
     const navCategory = urlParams.get("category");
 
-    let category, email, phone, image;
+    let category;
 
     // ===============================
-    // IF CLICKED FROM NAVBAR
+    // FROM NAVBAR
     // ===============================
+
     if (navCategory) {
 
         category = navCategory;
 
         if (!categoryData[category]) return;
 
-        document.getElementById("predictedCategory").innerHTML = category; // ❌ No "Predicted Category:"
+        document.getElementById("predictedCategory").innerHTML = category;
 
         document.getElementById("descriptionText").innerHTML =
             categoryData[category].description;
@@ -104,15 +100,18 @@ window.onload = function () {
         document.getElementById("phone").innerHTML =
             "Phone: " + categoryData[category].phone;
 
-        document.getElementById("categoryImage").src =
-            categoryData[category].image;
+        // 🔥 SET FULL BACKGROUND IMAGE
+        document.body.style.backgroundImage =
+            "url('" + categoryData[category].image + "')";
+        document.body.classList.add("result-bg");
 
         return;
     }
 
     // ===============================
-    // IF COMING FROM PREDICTION
+    // FROM AI PREDICTION
     // ===============================
+
     category = localStorage.getItem("category");
 
     if (category === "Athletics and sports") {
@@ -143,11 +142,14 @@ window.onload = function () {
         categoryData[category].description;
 
     document.getElementById("email").innerHTML =
-    "Email: " + categoryData[category].email;
+        "Email: " + categoryData[category].email;
 
     document.getElementById("phone").innerHTML =
         "Phone: " + categoryData[category].phone;
 
-    document.getElementById("categoryImage").src =
-        categoryData[category].image;
+    // 🔥 SET BACKGROUND IMAGE
+    document.body.style.backgroundImage =
+        "url('" + categoryData[category].image + "')";
+    document.body.classList.add("result-bg");
+
 };
