@@ -47,10 +47,34 @@ def home():
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    text = request.json["complaint"]
-    vect = vectorizer.transform([text])
-    result = model.predict(vect)[0]
+    text = request.json["complaint"].lower()
 
+    # ✅ STEP 1: Direct category detection
+    if "hostel" in text:
+        result = "Hostel"
+    elif "canteen" in text:
+        result = "Food and Cantines"
+    elif "career" in text or "placement" in text:
+        result = "Career opportunities"
+    elif "health" in text or "sick" in text:
+        result = "Health and Well-being Support"
+    elif "academic" in text or "study" in text:
+        result = "Academic Support and Resources"
+    elif "sports" in text:
+        result = "Athletics and sports"
+
+    # ✅ STEP 2: Keyword logic
+    elif "room" in text:
+        result = "Hostel"
+    elif "food" in text or "eat" in text:
+        result = "Food and Cantines"
+
+    # 🤖 STEP 3: ML fallback (your original code)
+    else:
+        vect = vectorizer.transform([text])
+        result = model.predict(vect)[0]
+
+    # ✅ KEEP THIS SAME
     data = contacts.get(result, {
         "email":"Not Available",
         "phone":"Not Available",
