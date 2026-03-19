@@ -40,16 +40,16 @@ window.onload = function () {
 
         "Athletics and Sports": {
             description: "This category includes complaints related to sports facilities, training, equipment, and athletic activities.",
-            email: "principal@lbsitw.ac.in",
-            phone: "+91 471 2353831 , +91 471 2353720",
-            image: "images/sports.jpg"
+            email: "sreejaubhasi@lbsitw.ac.in",
+            phone: "9400276295",
+            image: "images/sports.jpeg"
         },
 
         "Career Opportunities": {
             description: "This category addresses grievances related to placements, internships, workshops, training programs, and career guidance.",
-            email: "principal@lbsitw.ac.in",
-            phone: "+91 471 2353831 , +91 471 2353720",
-            image: "images/career.jpg"
+            email: "cgpu@lbsitw.ac.in, anilkumar@lbsitw.ac.in",
+            phone: "9495838477, Fax: 91-471-2343395, Placement Office.Ph: 91-471-2349262 ",
+            image: "images/career1.jpg"
         },
 
         "Health and Well-being Support": {
@@ -62,14 +62,14 @@ window.onload = function () {
         "Food and Canteen Issues": {
             description: "This category focuses on food quality, hygiene, pricing, and service efficiency of the campus canteen.",
             email: "principal@lbsitw.ac.in",
-            phone: "+91 471 2353831 , +91 471 2353720",
+            phone: "+919497488832",
             image: "images/canteen.jpg"
         },
 
         "Hostel Issues": {
             description: "This category includes complaints regarding hostel accommodation, maintenance, water supply, electricity, and security.",
-            email: "principal@lbsitw.ac.in",
-            phone: "+91 471 2353831 , +91 471 2353720",
+            email: "keerthivs@lbsitw.ac.in",
+            phone: "9745527664 - Warden Prof.Keerthi V S",
             image: "images/hostel.jpg"
         }
     };
