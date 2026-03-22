@@ -44,9 +44,9 @@ window.onload = function () {
         },
         "Student Affairs": {
             description: "Student Affairs at LBSITW addresses concerns related to administrative support, student services, documentation, and overall student management processes. This category includes issues such as delays in issuing certificates, difficulties in accessing student services, lack of clear communication, and challenges in administrative procedures. By ensuring that such complaints are directed to the appropriate authorities, the system helps improve efficiency, transparency, and the overall student experience. Proper handling of these concerns contributes to a more organized and student-friendly institutional environment.",
-            email: "principal@lbsitw.ac.in",
-            phone: "+91 471 2353831 , +91 471 2353720",
-            image: "images/academic.jpg"
+            email: "resmi@lbsitw.ac.in, resmilbs@gmail.com",
+            phone: "+919446136613",
+            image: "images/image.png"
         },
 
         "Athletics and Sports": {
@@ -65,8 +65,8 @@ window.onload = function () {
 
         "Health and Well-being Support": {
             description: "Health and Well-being Support at LBSITW addresses concerns related to physical health, mental well-being, hygiene, and availability of medical facilities. This category includes issues such as inadequate health services, lack of counseling support, poor sanitation, and difficulties in accessing medical assistance. By ensuring that such complaints reach the appropriate authorities, the system helps promote a safer, healthier, and more supportive campus environment for students.",
-            email: "principal@lbsitw.ac.in",
-            phone: "+91 471 2353831 , +91 471 2353720",
+            email: "sreejaubhasi@lbsitw.ac.in",
+            phone: "9400276295",
             image: "images/health.jpg"
         },
 
@@ -81,7 +81,7 @@ window.onload = function () {
             description: "Hostel Issues at LBSITW address concerns related to accommodation, maintenance, cleanliness, and essential living facilities. This category includes issues such as poor room conditions, inadequate maintenance, water and electricity problems, and lack of proper security. By ensuring that these complaints are communicated to the appropriate authorities, the system helps improve living conditions and provides a more comfortable and secure residential experience for students.",
             email: "keerthivs@lbsitw.ac.in",
             phone: "9745527664 - Warden Prof.Keerthi V S",
-            image: "images/hostel.jpg"
+            image: "images/hostel1.jpg"
         }
     };
 
