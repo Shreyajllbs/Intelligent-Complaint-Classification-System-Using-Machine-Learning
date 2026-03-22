@@ -2,6 +2,11 @@ function sendComplaint() {
 
     let text = document.getElementById("complaint").value;
 
+    if (!text.trim()) {
+        alert("Please enter a complaint");
+        return;
+    }
+
     fetch("http://127.0.0.1:5000/predict", {
         method: "POST",
         headers: {
@@ -32,42 +37,42 @@ window.onload = function () {
     const categoryData = {
 
         "Academic Support and Resources": {
-            description: "This category includes complaints related to teaching, examinations, laboratories, library services, classroom infrastructure, and study materials.",
+            description: "Academic Support and Resources at LBSITW address concerns related to teaching quality, study materials, examinations, and overall learning experience. By identifying and directing these complaints to the appropriate authorities, the system helps improve academic standards and enhances student learning outcomes.",
             email: "principal@lbsitw.ac.in",
             phone: "+91 471 2353831 , +91 471 2353720",
             image: "images/academic.jpg"
         },
 
         "Athletics and Sports": {
-            description: "This category includes complaints related to sports facilities, training, equipment, and athletic activities.",
+            description: "Athletics and Sports at LBSITW involve concerns related to sports facilities, equipment, and training opportunities. Proper resolution of these issues supports student participation and overall development.",
             email: "sreejaubhasi@lbsitw.ac.in",
             phone: "9400276295",
             image: "images/sports.jpeg"
         },
 
         "Career Opportunities": {
-            description: "This category addresses grievances related to placements, internships, workshops, training programs, and career guidance.",
+            description: "Career Opportunities at LBSITW focus on issues related to placements, internships, and professional guidance. Ensuring that such complaints reach the right channels helps strengthen career support systems and improves opportunities for student growth.",
             email: "cgpu@lbsitw.ac.in, anilkumar@lbsitw.ac.in",
             phone: "9495838477, Fax: 91-471-2343395, Placement Office.Ph: 91-471-2349262 ",
             image: "images/career1.jpg"
         },
 
         "Health and Well-being Support": {
-            description: "This category covers medical facilities, hygiene, sanitation, emergency care, and mental health support available on campus.",
+            description: "Health and Well-being Support at LBSITW covers concerns related to physical and mental health, hygiene, and medical facilities. Proper handling of these complaints contributes to a safer and healthier campus environment.",
             email: "principal@lbsitw.ac.in",
             phone: "+91 471 2353831 , +91 471 2353720",
             image: "images/health.jpg"
         },
 
         "Food and Canteen Issues": {
-            description: "This category focuses on food quality, hygiene, pricing, and service efficiency of the campus canteen.",
+            description: "Food and Canteen Issues at LBSITW include complaints regarding food quality, hygiene, and service standards. Addressing these concerns effectively helps maintain better dining conditions and student satisfaction.",
             email: "principal@lbsitw.ac.in",
             phone: "+919497488832",
             image: "images/canteen.jpg"
         },
 
         "Hostel Issues": {
-            description: "This category includes complaints regarding hostel accommodation, maintenance, water supply, electricity, and security.",
+            description: "Hostel Issues at LBSITW deal with accommodation, maintenance, cleanliness, and essential facilities. Ensuring that complaints are directed appropriately helps improve living conditions and overall student comfort.",
             email: "keerthivs@lbsitw.ac.in",
             phone: "9745527664 - Warden Prof.Keerthi V S",
             image: "images/hostel.jpg"
@@ -117,11 +122,7 @@ window.onload = function () {
     if (category === "Athletics and sports") {
         category = "Athletics and Sports";
     }
-
-    if (category === "Food and Canteen") {
-        category = "Food and Canteen Issues";
-    }
-
+    
     if (category === "Career opportunities") {
         category = "Career Opportunities";
     }

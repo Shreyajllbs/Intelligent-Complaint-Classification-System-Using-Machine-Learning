@@ -9,7 +9,7 @@ model = pickle.load(open("model/classifier.pkl","rb"))
 vectorizer = pickle.load(open("model/vectorizer.pkl","rb"))
 
 contacts = {
-    "Food and Cantines":{
+    "Food and Canteen Issues":{
         "email":"principal@lbsitw.ac.in",
         "phone":" +91 471 2353831 , +91 471 2353720",
         "image":"images/canteen.jpg"
@@ -53,7 +53,7 @@ def predict():
     if "hostel" in text:
         result = "Hostel"
     elif "canteen" in text:
-        result = "Food and Cantines"
+        result = "Food and Canteen Issues"
     elif "career" in text or "placement" in text:
         result = "Career opportunities"
     elif "health" in text or "sick" in text:
@@ -67,7 +67,7 @@ def predict():
     elif "room" in text:
         result = "Hostel"
     elif "food" in text or "eat" in text:
-        result = "Food and Cantines"
+        result = "Food and Canteen Issues"
 
     # 🤖 STEP 3: ML fallback (your original code)
     else:
