@@ -24,6 +24,11 @@ contacts = {
         "phone":" +91 471 2353831",
         "image":"images/health.jpg"
     },
+    "Student Affairs":{
+        "email":"principal@lbsitw.ac.in",
+        "phone":" +91 471 2353831 , +91 471 2353720.",
+        "image":"images/academic.jpg"
+    },
     "Academic Support and Resources":{
         "email":"principal@lbsitw.ac.in",
         "phone":" +91 471 2353831 , +91 471 2353720.",
@@ -60,6 +65,8 @@ def predict():
         result = "Health and Well-being Support"
     elif "academic" in text or "study" in text:
         result = "Academic Support and Resources"
+    elif "fees" in text or "affairs" in text:
+        result = "Student Affairs"
     elif "sports" in text:
         result = "Athletics and sports"
 

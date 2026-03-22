@@ -37,42 +37,48 @@ window.onload = function () {
     const categoryData = {
 
         "Academic Support and Resources": {
-            description: "Academic Support and Resources at LBSITW address concerns related to teaching quality, study materials, examinations, and overall learning experience. By identifying and directing these complaints to the appropriate authorities, the system helps improve academic standards and enhances student learning outcomes.",
+            description: "Academic Support and Resources at LBSITW addresses concerns related to teaching quality, availability of study materials, examination processes, and overall academic guidance. This category includes issues such as lack of proper instructional support, unclear academic procedures, difficulty in accessing learning resources, and challenges faced during evaluations. By ensuring that such complaints are directed to the appropriate authorities, the system helps enhance academic standards, improve learning experiences, and support students in achieving better educational outcomes.",
+            email: "principal@lbsitw.ac.in",
+            phone: "+91 471 2353831 , +91 471 2353720",
+            image: "images/academic.jpg"
+        },
+        "Student Affairs": {
+            description: "Student Affairs at LBSITW addresses concerns related to administrative support, student services, documentation, and overall student management processes. This category includes issues such as delays in issuing certificates, difficulties in accessing student services, lack of clear communication, and challenges in administrative procedures. By ensuring that such complaints are directed to the appropriate authorities, the system helps improve efficiency, transparency, and the overall student experience. Proper handling of these concerns contributes to a more organized and student-friendly institutional environment.",
             email: "principal@lbsitw.ac.in",
             phone: "+91 471 2353831 , +91 471 2353720",
             image: "images/academic.jpg"
         },
 
         "Athletics and Sports": {
-            description: "Athletics and Sports at LBSITW involve concerns related to sports facilities, equipment, and training opportunities. Proper resolution of these issues supports student participation and overall development.",
+            description: "Athletics and Sports at LBSITW focus on concerns related to sports facilities, equipment availability, training opportunities, and overall support for extracurricular activities. This category includes issues such as lack of proper infrastructure, insufficient equipment, limited access to training, and poor maintenance of sports areas. By directing these complaints to the relevant authorities, the system helps enhance sports facilities, encourage student participation, and promote overall physical development.",
             email: "sreejaubhasi@lbsitw.ac.in",
             phone: "9400276295",
             image: "images/sports.jpeg"
         },
 
         "Career Opportunities": {
-            description: "Career Opportunities at LBSITW focus on issues related to placements, internships, and professional guidance. Ensuring that such complaints reach the right channels helps strengthen career support systems and improves opportunities for student growth.",
+            description: "Career Opportunities at LBSITW focuses on concerns related to placements, internships, career guidance, and professional development support. This category includes issues such as limited placement opportunities, lack of industry exposure, insufficient training programs, and unclear career guidance processes. By directing these complaints to the relevant authorities, the system helps strengthen career support services, improve employability prospects, and ensure better professional growth opportunities for students.",
             email: "cgpu@lbsitw.ac.in, anilkumar@lbsitw.ac.in",
             phone: "9495838477, Fax: 91-471-2343395, Placement Office.Ph: 91-471-2349262 ",
             image: "images/career1.jpg"
         },
 
         "Health and Well-being Support": {
-            description: "Health and Well-being Support at LBSITW covers concerns related to physical and mental health, hygiene, and medical facilities. Proper handling of these complaints contributes to a safer and healthier campus environment.",
+            description: "Health and Well-being Support at LBSITW addresses concerns related to physical health, mental well-being, hygiene, and availability of medical facilities. This category includes issues such as inadequate health services, lack of counseling support, poor sanitation, and difficulties in accessing medical assistance. By ensuring that such complaints reach the appropriate authorities, the system helps promote a safer, healthier, and more supportive campus environment for students.",
             email: "principal@lbsitw.ac.in",
             phone: "+91 471 2353831 , +91 471 2353720",
             image: "images/health.jpg"
         },
 
         "Food and Canteen Issues": {
-            description: "Food and Canteen Issues at LBSITW include complaints regarding food quality, hygiene, and service standards. Addressing these concerns effectively helps maintain better dining conditions and student satisfaction.",
+            description: "Food and Canteen Issues at LBSITW cover concerns related to food quality, hygiene standards, pricing, and overall dining services. This category includes issues such as poor food quality, unclean conditions, limited menu options, and unsatisfactory service. By directing these complaints to the responsible authorities, the system helps improve food services, maintain hygiene standards, and enhance overall student satisfaction with campus dining facilities.",
             email: "principal@lbsitw.ac.in",
             phone: "+919497488832",
             image: "images/canteen.jpg"
         },
 
         "Hostel Issues": {
-            description: "Hostel Issues at LBSITW deal with accommodation, maintenance, cleanliness, and essential facilities. Ensuring that complaints are directed appropriately helps improve living conditions and overall student comfort.",
+            description: "Hostel Issues at LBSITW address concerns related to accommodation, maintenance, cleanliness, and essential living facilities. This category includes issues such as poor room conditions, inadequate maintenance, water and electricity problems, and lack of proper security. By ensuring that these complaints are communicated to the appropriate authorities, the system helps improve living conditions and provides a more comfortable and secure residential experience for students.",
             email: "keerthivs@lbsitw.ac.in",
             phone: "9745527664 - Warden Prof.Keerthi V S",
             image: "images/hostel.jpg"
