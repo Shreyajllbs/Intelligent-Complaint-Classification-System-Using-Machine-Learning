@@ -38,7 +38,7 @@ window.onload = function () {
 
         "Academic Support and Resources": {
             description: "Academic Support and Resources at LBSITW addresses concerns related to teaching quality, availability of study materials, examination processes, and overall academic guidance. This category is controlled by the Dean (Academics) of LBSITW, Dr. Smitha E. S. This category includes issues such as lack of proper instructional support, unclear academic procedures, difficulty in accessing learning resources, and challenges faced during evaluations. By ensuring that such complaints are directed to the appropriate authorities, the system helps enhance academic standards, improve learning experiences, and support students in achieving better educational outcomes." ,            
-            email: "smithaes@lbsitw@lbsitw.ac.in",
+            email: "smitha.es@lbt.ac.in",
             phone: "9497842109",
             image: "images/academics.jpeg"
         },
@@ -105,8 +105,11 @@ window.onload = function () {
         document.getElementById("descriptionText").innerHTML =
             categoryData[category].description;
 
-        document.getElementById("email").innerHTML =
-            "Email: " + categoryData[category].email;
+        let emailList = categoryData[category].email;
+
+    document.getElementById("email").innerHTML =
+        "Email: <a href='mailto:" + emailList.replace(/,\s*/g, ',') + "'>" 
+        + emailList + "</a>";
 
         document.getElementById("phone").innerHTML =
             "Phone: " + categoryData[category].phone;
