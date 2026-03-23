@@ -107,9 +107,14 @@ window.onload = function () {
 
         let emailList = categoryData[category].email;
 
-        document.getElementById("email").innerHTML =
-            "Email: <a href='mailto:" + emailList.replace(/,\s*/g, ',') + "'>" 
-            + emailList + "</a>";
+if (emailList) {
+    document.getElementById("email").innerHTML =
+        "Email: <a href='mailto:" + emailList.replace(/,\s*/g, ',') + "'>" 
+        + emailList + "</a>";
+} else {
+    document.getElementById("email").innerHTML =
+        "Email: Not available";
+}
 
         let phoneText = categoryData[category].phone;
 
