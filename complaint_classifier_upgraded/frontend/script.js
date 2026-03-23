@@ -107,17 +107,29 @@ window.onload = function () {
 
         let emailList = categoryData[category].email;
 
-    document.getElementById("email").innerHTML =
-        "Email: <a href='mailto:" + emailList.replace(/,\s*/g, ',') + "'>" 
-        + emailList + "</a>";
+        document.getElementById("email").innerHTML =
+            "Email: <a href='mailto:" + emailList.replace(/,\s*/g, ',') + "'>" 
+            + emailList + "</a>";
 
-        document.getElementById("phone").innerHTML =
-            "Phone: " + categoryData[category].phone;
+        let phoneText = categoryData[category].phone;
 
-        // 🔥 SET FULL BACKGROUND IMAGE
-        document.body.style.backgroundImage =
-            "url('" + categoryData[category].image + "')";
-        document.body.classList.add("result-bg");
+        let phones = phoneText.match(/\+?\d[\d\s-]+/g);
+
+        let phoneHTML = "Phone: ";
+
+        if (phones) {
+            phones.forEach(num => {
+                let cleanNum = num.replace(/\s|-/g, '');
+                phoneHTML += `<a href="tel:${cleanNum}">${num}</a> `;
+            });
+        } else {
+            phoneHTML += phoneText;
+        }
+
+        document.getElementById("phone").innerHTML = phoneHTML;
+                document.body.style.backgroundImage =
+                    "url('" + categoryData[category].image + "')";
+                document.body.classList.add("result-bg");
 
         return;
     }
