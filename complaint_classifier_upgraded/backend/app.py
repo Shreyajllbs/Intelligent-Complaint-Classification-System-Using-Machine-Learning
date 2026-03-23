@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import pickle
+import sqlite3
+from datetime import datetime
 
 app = Flask(__name__)
 CORS(app)
@@ -45,10 +47,45 @@ contacts = {
         "image":"images/sports.jpg"
     }
 }
+def init_db():
+    conn = sqlite3.connect("complaints.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS complaints (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        text TEXT,
+        category TEXT,
+        timestamp TEXT
+    )
+    """)
+
+    conn.commit()
+    conn.close()
+
+init_db()
 
 @app.route("/")
 def home():
     return "Backend is running successfully"
+
+@app.route("/history", methods=["GET"])
+def history():
+    conn = sqlite3.connect("complaints.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT category, COUNT(*) FROM complaints GROUP BY category")
+    counts = cursor.fetchall()
+
+    cursor.execute("SELECT text, category, timestamp FROM complaints ORDER BY id DESC LIMIT 5")
+    recent = cursor.fetchall()
+
+    conn.close()
+
+    return jsonify({
+        "counts": counts,
+        "recent": recent
+    })
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -87,6 +124,22 @@ def predict():
         "phone":"Not Available",
         "image":""
     })
+
+    # =========================
+# STORE IN DATABASE
+# =========================
+    time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    conn = sqlite3.connect("complaints.db")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "INSERT INTO complaints (text, category, timestamp) VALUES (?, ?, ?)",
+        (text, result, time)
+        )
+
+    conn.commit()
+    conn.close()
 
     return jsonify({
         "category": result,
