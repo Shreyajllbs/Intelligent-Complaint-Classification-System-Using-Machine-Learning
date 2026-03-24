@@ -148,5 +148,25 @@ def predict():
         "image": data["image"]
     })
 
+@app.route('/get-complaints', methods=['GET'])
+def get_complaints():
+    conn = sqlite3.connect('complaints.db')
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT text, category, timestamp FROM complaints ORDER BY id DESC LIMIT 10")
+    rows = cursor.fetchall()
+
+    conn.close()
+
+    data = []
+    for row in rows:
+        data.append({
+            "complaint": row[0],
+            "category": row[1],
+            "time": row[2]
+        })
+
+    return jsonify({"complaints": data})
+
 if __name__ == "__main__":
     app.run(debug=True)

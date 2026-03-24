@@ -107,14 +107,9 @@ window.onload = function () {
 
         let emailList = categoryData[category].email;
 
-if (emailList) {
-    document.getElementById("email").innerHTML =
-        "Email: <a href='mailto:" + emailList.replace(/,\s*/g, ',') + "'>" 
-        + emailList + "</a>";
-} else {
-    document.getElementById("email").innerHTML =
-        "Email: Not available";
-}
+        document.getElementById("email").innerHTML =
+            "Email: <a href='mailto:" + emailList.replace(/,\s*/g, ',') + "'>" 
+            + emailList + "</a>";
 
         let phoneText = categoryData[category].phone;
 
@@ -180,3 +175,94 @@ if (emailList) {
     document.body.classList.add("result-bg");
 
 };
+
+function toggleSidebar() {
+  document.querySelector(".sidebar").classList.toggle("active");
+}
+
+
+function showHistory() {
+  document.getElementById("homeSection").style.display = "none";
+  document.getElementById("historySection").style.display = "block";
+
+  document.getElementById("navbar").style.display = "none"; // 🔥 hide navbar
+
+  document.querySelector(".sidebar").classList.remove("active");
+
+  loadHistory();
+}
+
+function showHome() {
+  document.getElementById("homeSection").style.display = "block";
+  document.getElementById("historySection").style.display = "none";
+
+  document.getElementById("navbar").style.display = "flex"; // 🔥 show navbar
+
+  document.querySelector(".sidebar").classList.remove("active");
+}
+
+function loadHistory() {
+  fetch("http://127.0.0.1:5000/history")
+    .then(res => res.json())
+    .then(data => {
+
+      // =========================
+      // 🔥 PIE CHART DATA
+      // =========================
+      const labels = data.counts.map(item => item[0]);
+      const values = data.counts.map(item => item[1]);
+
+      const ctx = document.getElementById("complaintChart").getContext("2d");
+
+      // destroy old chart if exists
+      if (window.myChart) {
+        window.myChart.destroy();
+      }
+
+      window.myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels: labels,
+          datasets: [{
+            data: values
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      });
+
+      // =========================
+      // 🔥 RECENT COMPLAINTS
+      // =========================
+      const historyDiv = document.getElementById("historyList");
+      historyDiv.innerHTML = "";
+
+      data.recent.forEach(item => {
+
+        let date = item[2].split(" ")[0];
+        let time = item[2].split(" ")[1];
+
+        const div = document.createElement("div");
+        div.style.padding = "12px";
+        div.style.marginBottom = "15px";
+        div.style.borderRadius = "10px";
+        div.style.background = "rgba(255,255,255,0.8)";
+
+        div.innerHTML = `
+  <p><strong>Complaint:</strong> ${item[0]}</p>
+  <p><strong>Category:</strong> ${item[1]}</p>
+  <p><strong>Date:</strong> ${date}</p>
+  <p><strong>Time:</strong> ${time}</p>
+`;
+
+        historyDiv.appendChild(div);
+      });
+
+    });
+}

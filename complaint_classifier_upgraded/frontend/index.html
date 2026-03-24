@@ -2,13 +2,21 @@
 <html>
 <head>
 <title>Intelligent Complaint System</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link rel="icon" type="image/png" href="images/academics.jpeg">
 <link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body class="home-page">
+  <div class="sidebar">
+  <h2 class="logo">Menu</h2>
+  <a href="index.html">Home</a>
+  <a href="#" onclick="showHistory()">History</a>
+
+</div>
 <!-- ===== ADD NAVBAR BELOW BODY ===== -->
-<div class="navbar">
+<div class="navbar" id="navbar">
+    <div class="menu-icon" onclick="toggleSidebar()">☰</div>
   <div class="college-name">LBS INSTITUTE OF TECHNOLOGY FOR WOMEN POOJAPURA</div>
   <div class="nav-links">
     <a href="result.html?category=Academic%20Support%20and%20Resources">Academic</a>
@@ -20,6 +28,7 @@
     <a href="result.html?category=Hostel%20Issues">Hostel</a>
   </div>
 </div>
+<div id="homeSection">
 <div class="hero-text">
   <h1>CampusResolver</h1>
   <p>Intelligently directing student concerns to the right place</p>
@@ -39,7 +48,27 @@
     </div>
   </div>
 </div>
+</div>
+<div id="historySection" style="display:none;">
 
+  <!-- ✅ ADD THIS LINE -->
+  <div class="menu-icon" onclick="toggleSidebar()">☰</div>
+
+  <div class="history-container">
+
+    <!-- LEFT: PIE CHART -->
+    <div class="chart-box">
+      <canvas id="complaintChart"></canvas>
+    </div>
+
+    <!-- RIGHT: RECENT COMPLAINTS -->
+    <div class="card">
+      <h2>Recent Complaints</h2>
+      <div id="historyList"></div>
+    </div>
+
+  </div>
+</div>
 <script src="script.js"></script>
 </body>
 </html>
