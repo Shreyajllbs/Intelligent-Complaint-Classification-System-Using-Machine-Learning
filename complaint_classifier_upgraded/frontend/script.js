@@ -64,7 +64,7 @@ window.onload = function () {
         },
 
         "Health and Well-being Support": {
-            description: "Health and Well-being Support at LBSITW addresses concerns related to physical health, mental well-being, hygiene, and availability of medical facilities. This category is managed by Dr. Sreeja U Bhasi. This category includes issues such as inadequate health services, lack of counseling support, poor sanitation, and difficulties in accessing medical assistance. By ensuring that such complaints reach the appropriate authorities, the system helps promote a safer, healthier, and more supportive campus environment for students." ,   description: "Health and Well-being Support at LBSITW addresses concerns related to physical health, mental well-being, hygiene, and availability of medical facilities. This category includes issues such as inadequate health services, lack of counseling support, poor sanitation, and difficulties in accessing medical assistance. By ensuring that such complaints reach the appropriate authorities, the system helps promote a safer, healthier, and more supportive campus environment for students.",
+            description: "Health and Well-being Support at LBSITW addresses concerns related to physical health, mental well-being, hygiene, and availability of medical facilities. This category is managed by Dr. Sreeja U Bhasi. This category includes issues such as inadequate health services, lack of counseling support, poor sanitation, and difficulties in accessing medical assistance. By ensuring that such complaints reach the appropriate authorities, the system helps promote a safer, healthier, and more supportive campus environment for students." ,
             email: "sreejaubhasi@lbsitw.ac.in",
             phone: "9400276295",
             image: "images/health.png"
@@ -107,11 +107,15 @@ window.onload = function () {
 
         let emailList = categoryData[category].email;
 
-        document.getElementById("email").innerHTML =
-            "Email: <a href='mailto:" + emailList.replace(/,\s*/g, ',') + "'>" 
-            + emailList + "</a>";
+        if (emailList) {
+            document.getElementById("email").innerHTML =
+                "Email: <a href='mailto:" + emailList.replace(/,\s*/g, ',') + "'>" 
+                + emailList + "</a>";
+        } else {
+            document.getElementById("email").innerHTML = "Email: Not available";
+        }
 
-        let phoneText = categoryData[category].phone;
+        let phoneText = categoryData[category].phone || "Not available";
 
         let phones = phoneText.match(/\+?\d[\d\s-]+/g);
 

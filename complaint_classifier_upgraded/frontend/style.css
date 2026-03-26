@@ -213,7 +213,7 @@ button:hover {
 .result-page {
   width: 90%;
   max-width: 1200px;
-  margin: auto;
+  margin: 80px auto;
 
   background: rgba(0,0,0,0.55);
   backdrop-filter: blur(8px);
@@ -227,6 +227,10 @@ button:hover {
 .result-page p,
 .result-page a {
   color: white;
+}
+
+body:has(.result-page) {
+  margin-left: 0;   /* remove sidebar space */
 }
 
 /* 🔴 Top Category */
@@ -512,4 +516,11 @@ body {
   .sidebar {
     padding-top: 40px;
   }
+}
+
+/* FIX NAVBAR FOR RESULT PAGE */
+.result-body .navbar {
+  left: 0;
+  width: 100%;
+  padding: 15px 20px;
 }
