@@ -51,12 +51,23 @@ def init_db():
     conn = sqlite3.connect("complaints.db")
     cursor = conn.cursor()
 
+    # existing table
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS complaints (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         text TEXT,
         category TEXT,
         timestamp TEXT
+    )
+    """)
+    
+    # ✅ NEW feedback table
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS feedback (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        text TEXT,
+        predicted TEXT,
+        feedback TEXT
     )
     """)
 
@@ -89,8 +100,9 @@ def history():
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    text = request.json["complaint"].lower()
-
+    text = request.json.get("complaint", "").lower()
+    if not text:
+        return jsonify({"error": "No complaint provided"}), 400
     # ✅ STEP 1: Direct category detection
     if "hostel" in text:
         result = "Hostel"
@@ -142,12 +154,58 @@ def predict():
     conn.close()
 
     return jsonify({
-        "category": result,
-        "email": data["email"],
-        "phone": data["phone"],
-        "image": data["image"]
-    })
+    "category": result,
+    "email": data["email"],
+    "phone": data["phone"],
+    "image": data["image"],
+    "text": text
+})
+@app.route('/feedback', methods=['POST'])
+def save_feedback():
+    data = request.json
 
+    text = data.get("text")
+    predicted = data.get("category")
+    feedback = data.get("feedback")  # yes / no
+
+    conn = sqlite3.connect("complaints.db")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "INSERT INTO feedback (text, predicted, feedback) VALUES (?, ?, ?)",
+        (text, predicted, feedback)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return jsonify({"message": "Feedback saved successfully. Thank You!"})
+@app.route('/feedback-stats', methods=['GET'])
+def feedback_stats():
+    conn = sqlite3.connect("complaints.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT feedback, COUNT(*) FROM feedback GROUP BY feedback")
+    data = cursor.fetchall()
+
+    conn.close()
+
+    result = {"yes": 0, "no": 0}
+
+    for row in data:
+        if row[0] == "yes":
+            result["yes"] = row[1]
+        elif row[0] == "no":
+            result["no"] = row[1]
+
+    total = result["yes"] + result["no"]
+    accuracy = (result["yes"] / total * 100) if total > 0 else 0
+
+    return jsonify({
+        "yes": result["yes"],
+        "no": result["no"],
+        "accuracy": round(accuracy, 2)
+    })
 @app.route('/get-complaints', methods=['GET'])
 def get_complaints():
     conn = sqlite3.connect('complaints.db')

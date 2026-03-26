@@ -3,19 +3,40 @@
 <head>
   <title>Complaint History</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- ✅ Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
 
 <div class="container">
+
+  <!-- 📊 PIE CHART -->
+  <div class="card">
+    <h2>Complaint Distribution</h2>
+    <canvas id="complaintChart"></canvas>
+  </div>
+
+  <!-- 📊 FEEDBACK BAR CHART -->
+  <div class="card">
+    <h2>Prediction Accuracy</h2>
+    <canvas id="feedbackChart"></canvas>
+    <h3 id="accuracyText"></h3> <!-- optional accuracy text -->
+  </div>
+
+  <!-- 📝 RECENT COMPLAINTS -->
   <div class="card">
     <h2>Recent Complaints</h2>
     <div id="historyList"></div>
   </div>
+
 </div>
 
 <script src="script.js"></script>
+
 <script>
-  loadHistory();
+  loadHistory();  // ✅ loads both pie + bar chart
 </script>
 
 </body>

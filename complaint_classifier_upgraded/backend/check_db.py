@@ -7,6 +7,10 @@ cursor.execute("SELECT * FROM complaints")
 rows = cursor.fetchall()
 
 for row in rows:
-    print(row)
+
+    print("Complaint:", row[1])
+    print("Category:", row[2])
+    print("Time:", row[3])
+    print("----------------------")
 
 conn.close()

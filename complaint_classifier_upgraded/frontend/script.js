@@ -18,6 +18,7 @@ function sendComplaint() {
     .then(data => {
 
         localStorage.setItem("category", data.category);
+        localStorage.setItem("text", data.text);
 
         window.location.href = "result.html";
     })
@@ -27,7 +28,71 @@ function sendComplaint() {
     });
 }
 
+function sendFeedback(value) {
 
+    const text = localStorage.getItem("text");
+    const category = localStorage.getItem("category");
+
+    fetch("http://127.0.0.1:5000/feedback", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            text: text,
+            category: category,
+            feedback: value   // yes / no
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert("Thanks for your feedback!");
+    })
+    .catch(err => console.log(err));
+}
+
+function loadFeedbackChart() {
+
+    fetch("http://127.0.0.1:5000/feedback-stats")
+    .then(res => res.json())
+    .then(data => {
+
+        console.log(data); // debug
+
+        const canvas = document.getElementById("feedbackChart");
+
+        if (!canvas) {
+            console.log("feedbackChart canvas not found");
+            return;
+        }
+
+        const ctx = canvas.getContext("2d");
+
+        if (window.feedbackChart) {
+            window.feedbackChart.destroy();
+        }
+
+        window.feedbackChart = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: ["Correct", "Incorrect"],
+                datasets: [{
+                    label: "Prediction Accuracy",
+                    data: [data.yes, data.no],
+                    backgroundColor: ["green", "red"]
+                }]
+            }
+        });
+
+        // ✅ SAFE ADD (no error if element missing)
+        const accuracyText = document.getElementById("accuracyText");
+        if (accuracyText) {
+            accuracyText.innerHTML = "Accuracy: " + data.accuracy + "%";
+        }
+
+    })
+    .catch(err => console.log(err));
+}
 // ================= RESULT PAGE =================
 
 window.onload = function () {
@@ -206,19 +271,20 @@ function showHome() {
 }
 
 function loadHistory() {
+
   fetch("http://127.0.0.1:5000/history")
     .then(res => res.json())
     .then(data => {
 
-      // =========================
-      // 🔥 PIE CHART DATA
-      // =========================
+      // ✅ CHECK if pie chart exists
+      const pieCanvas = document.getElementById("complaintChart");
+      if (!pieCanvas) return;
+
       const labels = data.counts.map(item => item[0]);
       const values = data.counts.map(item => item[1]);
 
-      const ctx = document.getElementById("complaintChart").getContext("2d");
+      const ctx = pieCanvas.getContext("2d");
 
-      // destroy old chart if exists
       if (window.myChart) {
         window.myChart.destroy();
       }
@@ -230,16 +296,13 @@ function loadHistory() {
           datasets: [{
             data: values
           }]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              position: "bottom"
-            }
-          }
         }
       });
+
+      // ✅ CALL ONLY ONCE (FIXED)
+      if (document.getElementById("feedbackChart")) {
+        loadFeedbackChart();
+      }
 
       // =========================
       // 🔥 RECENT COMPLAINTS
@@ -268,5 +331,6 @@ function loadHistory() {
         historyDiv.appendChild(div);
       });
 
-    });
+    })
+    .catch(err => console.log(err));
 }
