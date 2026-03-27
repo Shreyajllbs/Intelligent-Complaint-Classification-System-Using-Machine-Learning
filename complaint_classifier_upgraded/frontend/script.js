@@ -95,6 +95,7 @@ function loadFeedbackChart() {
 }
 // ================= RESULT PAGE =================
 
+const isCategoryPage = window.location.href.includes("category.html");
 window.onload = function () {
 
     if (
@@ -176,12 +177,16 @@ window.onload = function () {
         let emailList = categoryData[category].email;
 
         if (emailList) {
-            document.getElementById("email").innerHTML =
-                "Email: <a href='mailto:" + emailList.replace(/,\s*/g, ',') + "'>" 
-                + emailList + "</a>";
-        } else {
-            document.getElementById("email").innerHTML = "Email: Not available";
-        }
+    if (navCategory) {   // 🔥 THIS IS THE KEY CHANGE
+        document.getElementById("email").innerHTML = "Email: " + emailList;
+    } else {
+        document.getElementById("email").innerHTML =
+            "Email: <a href='mailto:" + emailList.replace(/,\s*/g, ',') + "'>" 
+            + emailList + "</a>";
+    }
+} else {
+    document.getElementById("email").innerHTML = "Email: Not available";
+}
 
         let phoneText = categoryData[category].phone || "Not available";
 
@@ -190,13 +195,17 @@ window.onload = function () {
         let phoneHTML = "Phone: ";
 
         if (phones) {
-            phones.forEach(num => {
-                let cleanNum = num.replace(/\s|-/g, '');
-                phoneHTML += `<a href="tel:${cleanNum}">${num}</a> `;
-            });
-        } else {
-            phoneHTML += phoneText;
-        }
+    if (navCategory) {   // 🔥 THIS IS THE KEY CHANGE
+        phoneHTML += phones.join(", ");
+    } else {
+        phones.forEach(num => {
+            let cleanNum = num.replace(/\s|-/g, '');
+            phoneHTML += `<a href="tel:${cleanNum}">${num}</a> `;
+        });
+    }
+} else {
+    phoneHTML += phoneText;
+}
 
         document.getElementById("phone").innerHTML = phoneHTML;
                 document.body.style.backgroundImage = "none";
@@ -238,11 +247,35 @@ window.onload = function () {
     document.getElementById("descriptionText").innerHTML =
         categoryData[category].description;
 
-    document.getElementById("email").innerHTML =
-        "Email: " + categoryData[category].email;
+    // ✅ EMAIL CLICKABLE (ONLY IN RESULT PAGE)
+let emailList = categoryData[category].email;
 
-    document.getElementById("phone").innerHTML =
-        "Phone: " + categoryData[category].phone;
+if (emailList) {
+    document.getElementById("email").innerHTML =
+        "Email: <a href='mailto:" + emailList.replace(/,\s*/g, ',') + "'>" 
+        + emailList + "</a>";
+} else {
+    document.getElementById("email").innerHTML = "Email: Not available";
+}
+
+
+// ✅ PHONE CLICKABLE
+let phoneText = categoryData[category].phone || "Not available";
+
+let phones = phoneText.match(/\+?\d[\d\s-]+/g);
+
+let phoneHTML = "Phone: ";
+
+if (phones) {
+    phones.forEach(num => {
+        let cleanNum = num.replace(/\s|-/g, '');
+        phoneHTML += `<a href="tel:${cleanNum}">${num}</a> `;
+    });
+} else {
+    phoneHTML += phoneText;
+}
+
+document.getElementById("phone").innerHTML = phoneHTML;
 
     // 🔥 SET BACKGROUND IMAGE
     document.body.style.backgroundImage =
@@ -323,7 +356,8 @@ function loadHistory() {
 
         const div = document.createElement("div");
         div.style.padding = "12px";
-        div.style.marginBottom = "15px";
+        div.style.marginBo
+        ttom = "15px";
         div.style.borderRadius = "10px";
         div.style.background = "rgba(255,255,255,0.8)";
 
@@ -339,4 +373,11 @@ function loadHistory() {
 
     })
     .catch(err => console.log(err));
+}
+
+function handleFeedback(value) {
+    sendFeedback(value); // existing function
+
+    // 🔥 Hide the box after click
+    document.getElementById("feedbackBox").style.display = "none";
 }
