@@ -97,7 +97,10 @@ function loadFeedbackChart() {
 
 window.onload = function () {
 
-    if (!window.location.pathname.includes("result.html")) return;
+    if (
+  !window.location.pathname.includes("result.html") &&
+  !window.location.pathname.includes("category.html")
+) return;
 
     const categoryData = {
 
@@ -196,9 +199,12 @@ window.onload = function () {
         }
 
         document.getElementById("phone").innerHTML = phoneHTML;
-                document.body.style.backgroundImage =
-                    "url('" + categoryData[category].image + "')";
+                document.body.style.backgroundImage = "none";
+                document.body.style.backgroundColor = "black";
                 document.body.classList.add("result-bg");
+
+        document.getElementById("categoryImage").src =
+        categoryData[category].image;
 
         return;
     }

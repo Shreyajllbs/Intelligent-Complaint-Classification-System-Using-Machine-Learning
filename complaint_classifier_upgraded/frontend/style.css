@@ -519,8 +519,34 @@ body {
 }
 
 /* FIX NAVBAR FOR RESULT PAGE */
+/* RESULT PAGE NAVBAR */
 .result-body .navbar {
   left: 0;
   width: 100%;
   padding: 15px 20px;
+}
+
+/* CATEGORY PAGE NAVBAR */
+.category-body .navbar {
+  left: 0;
+  width: 100%;
+  padding: 15px 20px;
+}
+
+/* REMOVE SIDEBAR SPACE FOR CATEGORY PAGE */
+.result-body,
+.category-body {
+  margin-left: 0 !important;
+}
+
+/* RESULT PAGE */
+.result-body {
+  margin-left: 0 !important;
+  
+}
+
+/* CATEGORY PAGE */
+.category-body {
+  margin-left: 0 !important;
+  background-color: black;
 }
