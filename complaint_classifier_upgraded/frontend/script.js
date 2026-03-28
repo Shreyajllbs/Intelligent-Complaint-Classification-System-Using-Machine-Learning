@@ -50,49 +50,6 @@ function sendFeedback(value) {
     })
     .catch(err => console.log(err));
 }
-
-function loadFeedbackChart() {
-
-    fetch("http://127.0.0.1:5000/feedback-stats")
-    .then(res => res.json())
-    .then(data => {
-
-        console.log(data); // debug
-
-        const canvas = document.getElementById("feedbackChart");
-
-        if (!canvas) {
-            console.log("feedbackChart canvas not found");
-            return;
-        }
-
-        const ctx = canvas.getContext("2d");
-
-        if (window.feedbackChart) {
-            window.feedbackChart.destroy();
-        }
-
-        window.feedbackChart = new Chart(ctx, {
-            type: "bar",
-            data: {
-                labels: ["Correct", "Incorrect"],
-                datasets: [{
-                    label: "Prediction Accuracy",
-                    data: [data.yes, data.no],
-                    backgroundColor: ["green", "red"]
-                }]
-            }
-        });
-
-        // ✅ SAFE ADD (no error if element missing)
-        const accuracyText = document.getElementById("accuracyText");
-        if (accuracyText) {
-            accuracyText.innerHTML = "Accuracy: " + data.accuracy + "%";
-        }
-
-    })
-    .catch(err => console.log(err));
-}
 // ================= RESULT PAGE =================
 
 const isCategoryPage = window.location.href.includes("category.html");
@@ -209,7 +166,6 @@ window.onload = function () {
 
         document.getElementById("phone").innerHTML = phoneHTML;
                 document.body.style.backgroundImage = "none";
-                document.body.style.backgroundColor = "black";
                 document.body.classList.add("result-bg");
 
         document.getElementById("categoryImage").src =
@@ -277,10 +233,12 @@ if (phones) {
 
 document.getElementById("phone").innerHTML = phoneHTML;
 
-    // 🔥 SET BACKGROUND IMAGE
+    if (!window.location.pathname.includes("category.html")) {
+    // ✅ ONLY for result page
     document.body.style.backgroundImage =
         "url('" + categoryData[category].image + "')";
     document.body.classList.add("result-bg");
+}
 
 };
 
@@ -338,11 +296,6 @@ function loadHistory() {
         }
       });
 
-      // ✅ CALL ONLY ONCE (FIXED)
-      if (document.getElementById("feedbackChart")) {
-        loadFeedbackChart();
-      }
-
       // =========================
       // 🔥 RECENT COMPLAINTS
       // =========================
@@ -356,8 +309,7 @@ function loadHistory() {
 
         const div = document.createElement("div");
         div.style.padding = "12px";
-        div.style.marginBo
-        ttom = "15px";
+        div.style.marginBottom = "15px";
         div.style.borderRadius = "10px";
         div.style.background = "rgba(255,255,255,0.8)";
 
@@ -376,8 +328,12 @@ function loadHistory() {
 }
 
 function handleFeedback(value) {
-    sendFeedback(value); // existing function
+    sendFeedback(value);
 
-    // 🔥 Hide the box after click
-    document.getElementById("feedbackBox").style.display = "none";
+    const box = document.getElementById("feedbackBox");
+    box.innerHTML = "✅ Thank you for your feedback!";
+
+    setTimeout(() => {
+        box.style.display = "none";
+    }, 2000);
 }

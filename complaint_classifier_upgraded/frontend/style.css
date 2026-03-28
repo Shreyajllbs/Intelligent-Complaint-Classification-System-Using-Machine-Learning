@@ -426,10 +426,7 @@ body {
   }
 }
 
-.menu-icon {
-  position: relative;
-  z-index: 2000; /* higher than sidebar */
-}
+
 
 .menu-icon {
   position: relative;
@@ -518,63 +515,129 @@ body {
   }
 }
 
+/* ================= HISTORY PAGE ================= */
+
+
+
+/* Glass Cards */
+.history-container .card {
+  background: hwb(0 95% 4% / 0.942);
+  backdrop-filter: blur(10px);
+
+  color: rgb(10, 9, 9);
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  border-radius: 20px;
+
+  box-shadow: 0 15px 40px rgba(244, 236, 236, 0.4);
+}
+
+/* Chart sizing */
+.history-container canvas {
+  margin-top: 15px;
+  width: 100% !important;
+  height: 300px !important;
+}
+
+/* Recent complaints scroll */
+#historyList {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .history-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
 /* FIX NAVBAR FOR RESULT PAGE */
-/* RESULT PAGE NAVBAR */
 .result-body .navbar {
   left: 0;
   width: 100%;
   padding: 15px 20px;
 }
 
-/* CATEGORY PAGE NAVBAR */
+/* REMOVE SIDEBAR SPACE FOR CATEGORY PAGE */
+body:has(.result-page) {
+  margin-left: 0;
+}
+
+/* ================= CATEGORY PAGE ================= */
+
+.category-page {
+  width: 90%;
+  max-width: 1200px;
+  margin: 80px auto;
+
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.category-page h1,
+.category-page h2,
+.category-page h3,
+.category-page p,
+.category-page a {
+  color: white;
+}
+
+/* remove sidebar space ONLY for category page */
+body.category-body {
+  margin-left: 0;
+}
+
+/* navbar full width ONLY for category */
 .category-body .navbar {
   left: 0;
   width: 100%;
-  padding: 15px 20px;
 }
 
-/* REMOVE SIDEBAR SPACE FOR CATEGORY PAGE */
-.result-body,
-.category-body {
-  margin-left: 0 !important;
+.category-page {
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
 }
 
-/* RESULT PAGE */
-.result-body {
-  margin-left: 0 !important;
-  
-}
-
-/* CATEGORY PAGE */
-.category-body {
-  margin-left: 0 !important;
-  background-color: black;
-}
+/* ================= FEEDBACK BOX ================= */
 
 .feedback-box {
-  margin-top: 25px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+
   padding: 20px;
   border-radius: 15px;
-  background: rgba(0, 200, 255, 0.15);
-  backdrop-filter: blur(10px);
+
+  width: 250px;
   text-align: center;
-  border: 1px solid rgba(0, 200, 255, 0.3);
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  z-index: 2000;
 }
 
 .feedback-box h3 {
+  font-size: 16px;
   margin-bottom: 15px;
-  font-size: 18px;
+  color: white;
 }
 
+/* buttons inside feedback */
 .feedback-box button {
-  width: auto;
-  padding: 10px 20px;
+  width: 45%;
   margin: 5px;
-  border-radius: 10px;
+  padding: 10px;
+  font-size: 14px;
 }
-
-/* Optional hover glow */
-.feedback-box button:hover {
-  transform: scale(1.1);
+.full-width {
+  width: 100% !important;
+  max-width: 800px;
 }
-

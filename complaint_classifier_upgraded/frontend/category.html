@@ -5,8 +5,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="category-body">
-  <!-- NAVBAR -->
+<body class="category-body" id="vanta-bg">
+    <!-- NAVBAR -->
 <div class="navbar">
   <div class="college-name">
     LBS INSTITUTE OF TECHNOLOGY FOR WOMEN POOJAPURA
@@ -17,8 +17,8 @@
 </div>
 
 
-<div class="result-page">
-
+<div class="category-page">
+  
   <!-- 🔴 CATEGORY TITLE -->
   <div class="top-category">
     <h1 id="predictedCategory"></h1>
@@ -51,6 +51,22 @@
 </div>
 
 <script src="script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
 
+<script>
+VANTA.FOG({
+  el: "#vanta-bg",
+  mouseControls: true,
+  touchControls: true,
+  gyroControls: false,
+  minHeight: 200.00,
+  minWidth: 200.00,
+  highlightColor: 0x8e8b83,
+  midtoneColor: 0x74524e,
+  lowlightColor: 0xb411e8,
+  baseColor: 0x1f1d1d
+});
+</script>
 </body>
 </html>
