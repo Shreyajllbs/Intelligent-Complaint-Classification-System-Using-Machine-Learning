@@ -233,6 +233,11 @@ body:has(.result-page) {
   margin-left: 0;   /* remove sidebar space */
 }
 
+/* Active sidebar link */
+.sidebar a.active {
+  background: #0072ff;
+  box-shadow: 0 0 10px #0072ff;
+}
 /* 🔴 Top Category */
 .top-category {
   text-align: center;

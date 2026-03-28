@@ -251,9 +251,11 @@ function showHistory() {
   document.getElementById("homeSection").style.display = "none";
   document.getElementById("historySection").style.display = "block";
 
-  document.getElementById("navbar").style.display = "none"; // 🔥 hide navbar
+  document.getElementById("navbar").style.display = "none";
 
   document.querySelector(".sidebar").classList.remove("active");
+
+  setActiveLink("history");   // ✅ ADD THIS
 
   loadHistory();
 }
@@ -262,9 +264,11 @@ function showHome() {
   document.getElementById("homeSection").style.display = "block";
   document.getElementById("historySection").style.display = "none";
 
-  document.getElementById("navbar").style.display = "flex"; // 🔥 show navbar
+  document.getElementById("navbar").style.display = "flex";
 
   document.querySelector(".sidebar").classList.remove("active");
+
+  setActiveLink("home");   // ✅ ADD THIS
 }
 
 function loadHistory() {
@@ -337,3 +341,18 @@ function handleFeedback(value) {
         box.style.display = "none";
     }, 2000);
 }
+
+function setActiveLink(page) {
+  document.getElementById("homeLink").classList.remove("active");
+  document.getElementById("historyLink").classList.remove("active");
+
+  if (page === "home") {
+    document.getElementById("homeLink").classList.add("active");
+  } else if (page === "history") {
+    document.getElementById("historyLink").classList.add("active");
+  }
+}
+
+window.onload = function () {
+  setActiveLink("home");  // default highlight
+};
