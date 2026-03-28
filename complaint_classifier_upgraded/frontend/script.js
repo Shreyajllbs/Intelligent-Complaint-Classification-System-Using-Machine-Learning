@@ -1,12 +1,32 @@
 function sendComplaint() {
 
     let text = document.getElementById("complaint").value;
-
+    
+    // Reject empty
     if (!text.trim()) {
         alert("Please enter a complaint");
         return;
     }
 
+// Reject only numbers
+    if (/^[0-9\s]+$/.test(text)) {
+        alert("⚠️ Complaint cannot be only numbers");
+        return;
+    }
+
+// Must contain letters
+    if (!/[a-zA-Z]/.test(text)) {
+        alert("⚠️ Complaint must contain meaningful words");
+        return;
+    }
+    
+// Minimum words check
+    const wordCount = text.trim().split(/\s+/).length;
+
+    if (wordCount < 3) {
+        alert("⚠️ Please enter a proper complaint (at least 3 words)");
+        return;
+    }
     fetch("http://127.0.0.1:5000/predict", {
         method: "POST",
         headers: {
@@ -19,19 +39,22 @@ function sendComplaint() {
 
         localStorage.setItem("category", data.category);
         localStorage.setItem("text", data.text);
-
+        localStorage.removeItem("feedbackGiven");
         window.location.href = "result.html";
     })
     .catch(error => {
         console.log(error);
         alert("Backend not connected");
     });
+    localStorage.removeItem("feedbackGiven");
 }
 
 function sendFeedback(value) {
 
     const text = localStorage.getItem("text");
     const category = localStorage.getItem("category");
+
+    console.log("Sending:", text, category, value);  // 🔥 ADD THIS
 
     fetch("http://127.0.0.1:5000/feedback", {
         method: "POST",
@@ -41,19 +64,36 @@ function sendFeedback(value) {
         body: JSON.stringify({
             text: text,
             category: category,
-            feedback: value   // yes / no
+            feedback: value
         })
     })
     .then(res => res.json())
     .then(data => {
-        alert("Thanks for your feedback!");
+        console.log("Response:", data); // 🔥 ADD THIS
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log("Error:", err));
 }
 // ================= RESULT PAGE =================
 
 const isCategoryPage = window.location.href.includes("category.html");
 window.onload = function () {
+    const box = document.getElementById("feedbackBox");
+    const feedbackGiven = localStorage.getItem("feedbackGiven");
+
+    if (box) {
+        if (feedbackGiven === "true") {
+            // AFTER feedback
+            box.innerHTML = "<h3>✅ Thank you for your feedback!</h3>";
+            box.style.pointerEvents = "none";
+        } else {
+            // BEFORE feedback
+            box.innerHTML = `
+                <h3>Was this prediction correct?</h3>
+                <button onclick="handleFeedback('yes')">Yes</button>
+                <button onclick="handleFeedback('no')">No</button>
+            `;
+        }
+    }
     if (document.getElementById("homeSection")) {
     setActive("homeLink");
   }
@@ -301,7 +341,43 @@ function loadHistory() {
           }]
         }
       });
+// =========================
+// 📊 FEEDBACK BAR CHART
+// =========================
+fetch("http://127.0.0.1:5000/feedback-stats")
+  .then(res => res.json())
+  .then(data => {
 
+    const barCanvas = document.getElementById("feedbackChart");
+    if (!barCanvas) return;
+
+    const ctx2 = barCanvas.getContext("2d");
+
+    if (window.barChart) {
+      window.barChart.destroy();
+    }
+
+    window.barChart = new Chart(ctx2, {
+      type: "bar",
+      data: {
+        labels: ["Correct (Yes)", "Wrong (No)"],
+        datasets: [{
+          label: "Feedback Count",
+          data: [data.yes, data.no],
+          backgroundColor: ["#00c6ff", "#ff4d4d"]
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+  })
+  .catch(err => console.log(err));
       // =========================
       // 🔥 RECENT COMPLAINTS
       // =========================
@@ -331,17 +407,23 @@ function loadHistory() {
 
     })
     .catch(err => console.log(err));
+    console.log("Feedback Data:", data);
 }
 
 function handleFeedback(value) {
     sendFeedback(value);
 
     const box = document.getElementById("feedbackBox");
-    box.innerHTML = "✅ Thank you for your feedback!";
 
-    setTimeout(() => {
-        box.style.display = "none";
-    }, 2000);
+   
+    localStorage.setItem("feedbackGiven", "true");
+
+   
+    box.innerHTML = "<h3> Thank you for your feedback!</h3>";
+
+    
+
+    box.style.pointerEvents = "none";
 }
 
 function setActive(linkId) {
