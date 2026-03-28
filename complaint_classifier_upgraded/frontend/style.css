@@ -233,11 +233,6 @@ body:has(.result-page) {
   margin-left: 0;   /* remove sidebar space */
 }
 
-/* Active sidebar link */
-.sidebar a.active {
-  background: #0072ff;
-  box-shadow: 0 0 10px #0072ff;
-}
 /* 🔴 Top Category */
 .top-category {
   text-align: center;
@@ -379,6 +374,15 @@ body:has(.result-page) {
 
 .sidebar a:hover {
   background: #00c6ff;
+}
+
+/* ✅ ACTIVE SIDEBAR LINK */
+.sidebar a.active {
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+  color: white;
+  font-weight: bold;
+  border-left: 4px solid white;
+  box-shadow: 0 0 10px rgba(0,198,255,0.7);
 }
 
 /* SHIFT MAIN CONTENT RIGHT */

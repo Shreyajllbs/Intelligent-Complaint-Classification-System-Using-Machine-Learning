@@ -54,7 +54,9 @@ function sendFeedback(value) {
 
 const isCategoryPage = window.location.href.includes("category.html");
 window.onload = function () {
-
+    if (document.getElementById("homeSection")) {
+    setActive("homeLink");
+  }
     if (
   !window.location.pathname.includes("result.html") &&
   !window.location.pathname.includes("category.html")
@@ -255,7 +257,7 @@ function showHistory() {
 
   document.querySelector(".sidebar").classList.remove("active");
 
-  setActiveLink("history");   // ✅ ADD THIS
+  setActive("historyLink");   // 🔥 ADD THIS
 
   loadHistory();
 }
@@ -268,7 +270,7 @@ function showHome() {
 
   document.querySelector(".sidebar").classList.remove("active");
 
-  setActiveLink("home");   // ✅ ADD THIS
+  setActive("homeLink");   // 🔥 ADD THIS
 }
 
 function loadHistory() {
@@ -342,17 +344,9 @@ function handleFeedback(value) {
     }, 2000);
 }
 
-function setActiveLink(page) {
+function setActive(linkId) {
   document.getElementById("homeLink").classList.remove("active");
   document.getElementById("historyLink").classList.remove("active");
 
-  if (page === "home") {
-    document.getElementById("homeLink").classList.add("active");
-  } else if (page === "history") {
-    document.getElementById("historyLink").classList.add("active");
-  }
+  document.getElementById(linkId).classList.add("active");
 }
-
-window.onload = function () {
-  setActiveLink("home");  // default highlight
-};
