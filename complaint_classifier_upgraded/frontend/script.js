@@ -54,7 +54,9 @@ function sendFeedback(value) {
 
 const isCategoryPage = window.location.href.includes("category.html");
 window.onload = function () {
-
+    if (document.getElementById("homeSection")) {
+    setActive("homeLink");
+  }
     if (
   !window.location.pathname.includes("result.html") &&
   !window.location.pathname.includes("category.html")
@@ -251,9 +253,11 @@ function showHistory() {
   document.getElementById("homeSection").style.display = "none";
   document.getElementById("historySection").style.display = "block";
 
-  document.getElementById("navbar").style.display = "none"; // 🔥 hide navbar
+  document.getElementById("navbar").style.display = "none";
 
   document.querySelector(".sidebar").classList.remove("active");
+
+  setActive("historyLink");   // 🔥 ADD THIS
 
   loadHistory();
 }
@@ -262,9 +266,11 @@ function showHome() {
   document.getElementById("homeSection").style.display = "block";
   document.getElementById("historySection").style.display = "none";
 
-  document.getElementById("navbar").style.display = "flex"; // 🔥 show navbar
+  document.getElementById("navbar").style.display = "flex";
 
   document.querySelector(".sidebar").classList.remove("active");
+
+  setActive("homeLink");   // 🔥 ADD THIS
 }
 
 function loadHistory() {
@@ -336,4 +342,11 @@ function handleFeedback(value) {
     setTimeout(() => {
         box.style.display = "none";
     }, 2000);
+}
+
+function setActive(linkId) {
+  document.getElementById("homeLink").classList.remove("active");
+  document.getElementById("historyLink").classList.remove("active");
+
+  document.getElementById(linkId).classList.add("active");
 }
