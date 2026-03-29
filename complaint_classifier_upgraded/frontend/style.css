@@ -221,9 +221,6 @@ button:hover {
   padding: 40px;
   border-radius: 20px;
 }
-.result-page h1,
-.result-page h2,
-.result-page h3,
 .result-page p,
 .result-page a {
   color: white;
@@ -609,8 +606,19 @@ body.category-body {
 }
 
 .category-page {
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(10px);
+  width: 95%;              /* takes more screen */
+  max-width: 1500px;      /* allows large screens */
+
+  margin: 80px auto;
+
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+
+  padding: 60px;          /* more inner space */
+  border-radius: 20px;
 }
 
 /* ================= FEEDBACK BOX ================= */
@@ -649,4 +657,57 @@ body.category-body {
 .full-width {
   width: 100% !important;
   max-width: 800px;
+}
+.category-body {
+  background-image: url("bg.jpeg");  /* same as home */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.extra-section {
+  margin-top: 40px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.extra-section .contact-box {
+  flex: 1;
+  min-width: 250px;
+  max-width: 400px;
+}
+
+.action-section {
+  width: 95%;
+  max-width: 1200px;
+  margin: 30px auto;
+
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+
+  padding: 30px;
+  border-radius: 20px;
+
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.action-box {
+  flex: 1;
+  min-width: 250px;
+
+  background: rgba(255, 255, 255, 0.12);
+  padding: 20px;
+  border-radius: 15px;
+
+  color: white;
+}
+
+h1, h2, h3 {
+  color: #00c6ff;
 }

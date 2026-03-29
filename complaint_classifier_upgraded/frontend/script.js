@@ -108,7 +108,8 @@ window.onload = function () {
             description: "Academic Support and Resources at LBSITW addresses concerns related to teaching quality, availability of study materials, examination processes, and overall academic guidance. This category is controlled by the Dean (Academics) of LBSITW, Dr. Smitha E. S. This category includes issues such as lack of proper instructional support, unclear academic procedures, difficulty in accessing learning resources, and challenges faced during evaluations. By ensuring that such complaints are directed to the appropriate authorities, the system helps enhance academic standards, improve learning experiences, and support students in achieving better educational outcomes." ,            
             email: "smitha.es@lbt.ac.in",
             phone: "9497842109",
-            image: "images/academics.jpeg"
+            image: "images/academics.jpeg",
+            
         },
         "Student Affairs": {
             description: "Student Affairs at LBSITW addresses concerns related to administrative support, student services, documentation, and overall student management processes. This category is managed by Dr. Resmi R, Faculty of ERE Program. This category includes issues such as delays in issuing certificates, difficulties in accessing student services, lack of clear communication, and challenges in administrative procedures. By ensuring that such complaints are directed to the appropriate authorities, the system helps improve efficiency, transparency, and the overall student experience. Proper handling of these concerns contributes to a more organized and student-friendly institutional environment.",
@@ -121,7 +122,8 @@ window.onload = function () {
             description: "Athletics and Sports at LBSITW focus on concerns related to sports facilities, equipment availability, training opportunities, and overall support for extracurricular activities. This category is managed by Dr. Sreeja U Bhasi, Union Sport Advisor at LBSITW. This category includes issues such as lack of proper infrastructure, insufficient equipment, limited access to training, and poor maintenance of sports areas. By directing these complaints to the relevant authorities, the system helps enhance sports facilities, encourage student participation, and promote overall physical development." ,
             email: "sreejaubhasi@lbsitw.ac.in",
             phone: "9400276295",
-            image: "images/sports.jpeg"
+            image: "images/sports.jpeg",
+            categoryImage: "images/sports.jpg"
         },
 
         "Career Opportunities": {
@@ -135,7 +137,8 @@ window.onload = function () {
             description: "Health and Well-being Support at LBSITW addresses concerns related to physical health, mental well-being, hygiene, and availability of medical facilities. This category is managed by Dr. Sreeja U Bhasi. This category includes issues such as inadequate health services, lack of counseling support, poor sanitation, and difficulties in accessing medical assistance. By ensuring that such complaints reach the appropriate authorities, the system helps promote a safer, healthier, and more supportive campus environment for students." ,
             email: "sreejaubhasi@lbsitw.ac.in",
             phone: "9400276295",
-            image: "images/health.png"
+            image: "images/health.png",
+            categoryImage: "images/health1.jpg"
         },
 
         "Food and Canteen Issues": {
@@ -211,7 +214,7 @@ window.onload = function () {
                 document.body.classList.add("result-bg");
 
         document.getElementById("categoryImage").src =
-        categoryData[category].image;
+    categoryData[category].categoryImage || categoryData[category].image;
 
         return;
     }
