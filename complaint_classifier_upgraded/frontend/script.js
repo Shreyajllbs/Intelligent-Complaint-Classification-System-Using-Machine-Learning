@@ -176,40 +176,63 @@ window.onload = function () {
         document.getElementById("descriptionText").innerHTML =
             categoryData[category].description;
 
-        let emailList = categoryData[category].email;
+        // ================= EMAIL =================
 
-        if (emailList) {
-    if (navCategory) {   // 🔥 THIS IS THE KEY CHANGE
-        document.getElementById("email").innerHTML = "Email: " + emailList;
-    } else {
-        document.getElementById("email").innerHTML =
-            "Email: <a href='mailto:" + emailList.replace(/,\s*/g, ',') + "'>" 
-            + emailList + "</a>";
-    }
+let emailList = categoryData[category].email;
+
+if (emailList) {
+
+    let emailArray = emailList.split(",");
+
+    let emailHTML = "";
+
+    emailArray.forEach(mail => {
+
+        mail = mail.trim();
+
+        emailHTML += `
+            <a href="mailto:${mail}">
+                ${mail}
+            </a><br>
+        `;
+    });
+
+    document.getElementById("emailLink").innerHTML = emailHTML;
+
 } else {
-    document.getElementById("email").innerHTML = "Email: Not available";
+
+    document.getElementById("emailLink").innerHTML =
+        "Not available";
 }
 
-        let phoneText = categoryData[category].phone || "Not available";
 
-        let phones = phoneText.match(/\+?\d[\d\s-]+/g);
+// ================= PHONE =================
 
-        let phoneHTML = "Phone: ";
+let phoneText = categoryData[category].phone || "Not available";
 
-        if (phones) {
-    if (navCategory) {   // 🔥 THIS IS THE KEY CHANGE
-        phoneHTML += phones.join(", ");
-    } else {
-        phones.forEach(num => {
-            let cleanNum = num.replace(/\s|-/g, '');
-            phoneHTML += `<a href="tel:${cleanNum}">${num}</a> `;
-        });
-    }
+let phones = phoneText.match(/\+?\d[\d\s-]+/g);
+
+let phoneHTML = "";
+
+if (phones) {
+
+    phones.forEach(num => {
+
+        let cleanNum = num.replace(/\s|-/g, '');
+
+        phoneHTML += `
+            <a href="tel:${cleanNum}">
+                ${num}
+            </a><br>
+        `;
+    });
+
 } else {
-    phoneHTML += phoneText;
+
+    phoneHTML = phoneText;
 }
 
-        document.getElementById("phone").innerHTML = phoneHTML;
+document.getElementById("phoneLink").innerHTML = phoneHTML;
                 document.body.style.backgroundImage = "none";
                 document.body.classList.add("result-bg");
 
@@ -248,35 +271,63 @@ window.onload = function () {
     document.getElementById("descriptionText").innerHTML =
         categoryData[category].description;
 
-    // ✅ EMAIL CLICKABLE (ONLY IN RESULT PAGE)
+    // ================= EMAIL =================
+
 let emailList = categoryData[category].email;
 
 if (emailList) {
-    document.getElementById("email").innerHTML =
-        "Email: <a href='mailto:" + emailList.replace(/,\s*/g, ',') + "'>" 
-        + emailList + "</a>";
+
+    let emailArray = emailList.split(",");
+
+    let emailHTML = "";
+
+    emailArray.forEach(mail => {
+
+        mail = mail.trim();
+
+        emailHTML += `
+            <a href="mailto:${mail}">
+                ${mail}
+            </a><br>
+        `;
+    });
+
+    document.getElementById("emailLink").innerHTML = emailHTML;
+
 } else {
-    document.getElementById("email").innerHTML = "Email: Not available";
+
+    document.getElementById("emailLink").innerHTML =
+        "Not available";
 }
 
 
-// ✅ PHONE CLICKABLE
+// ================= PHONE =================
+
 let phoneText = categoryData[category].phone || "Not available";
 
 let phones = phoneText.match(/\+?\d[\d\s-]+/g);
 
-let phoneHTML = "Phone: ";
+let phoneHTML = "";
 
 if (phones) {
+
     phones.forEach(num => {
+
         let cleanNum = num.replace(/\s|-/g, '');
-        phoneHTML += `<a href="tel:${cleanNum}">${num}</a> `;
+
+        phoneHTML += `
+            <a href="tel:${cleanNum}">
+                ${num}
+            </a><br>
+        `;
     });
+
 } else {
-    phoneHTML += phoneText;
+
+    phoneHTML = phoneText;
 }
 
-document.getElementById("phone").innerHTML = phoneHTML;
+document.getElementById("phoneLink").innerHTML = phoneHTML;
 
     if (!window.location.pathname.includes("category.html")) {
     // ✅ ONLY for result page
