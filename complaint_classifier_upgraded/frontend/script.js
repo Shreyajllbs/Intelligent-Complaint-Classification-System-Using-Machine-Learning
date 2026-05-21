@@ -271,63 +271,35 @@ document.getElementById("phoneLink").innerHTML = phoneHTML;
     document.getElementById("descriptionText").innerHTML =
         categoryData[category].description;
 
-    // ================= EMAIL =================
-
+    // ✅ EMAIL CLICKABLE (ONLY IN RESULT PAGE)
 let emailList = categoryData[category].email;
 
 if (emailList) {
-
-    let emailArray = emailList.split(",");
-
-    let emailHTML = "";
-
-    emailArray.forEach(mail => {
-
-        mail = mail.trim();
-
-        emailHTML += `
-            <a href="mailto:${mail}">
-                ${mail}
-            </a><br>
-        `;
-    });
-
-    document.getElementById("emailLink").innerHTML = emailHTML;
-
+    document.getElementById("email").innerHTML =
+        "Email: <a href='mailto:" + emailList.replace(/,\s*/g, ',') + "'>" 
+        + emailList + "</a>";
 } else {
-
-    document.getElementById("emailLink").innerHTML =
-        "Not available";
+    document.getElementById("email").innerHTML = "Email: Not available";
 }
 
 
-// ================= PHONE =================
-
+// ✅ PHONE CLICKABLE
 let phoneText = categoryData[category].phone || "Not available";
 
 let phones = phoneText.match(/\+?\d[\d\s-]+/g);
 
-let phoneHTML = "";
+let phoneHTML = "Phone: ";
 
 if (phones) {
-
     phones.forEach(num => {
-
         let cleanNum = num.replace(/\s|-/g, '');
-
-        phoneHTML += `
-            <a href="tel:${cleanNum}">
-                ${num}
-            </a><br>
-        `;
+        phoneHTML += `<a href="tel:${cleanNum}">${num}</a> `;
     });
-
 } else {
-
-    phoneHTML = phoneText;
+    phoneHTML += phoneText;
 }
 
-document.getElementById("phoneLink").innerHTML = phoneHTML;
+document.getElementById("phone").innerHTML = phoneHTML;
 
     if (!window.location.pathname.includes("category.html")) {
     // ✅ ONLY for result page
