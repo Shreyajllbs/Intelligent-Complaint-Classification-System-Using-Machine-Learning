@@ -51,7 +51,6 @@ def init_db():
     conn = sqlite3.connect("complaints.db")
     cursor = conn.cursor()
 
-    # existing table
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS complaints (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -61,7 +60,7 @@ def init_db():
     )
     """)
     
-    # ✅ NEW feedback table
+    
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS feedback (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -103,7 +102,7 @@ def predict():
     text = request.json.get("complaint", "").lower()
     if not text:
         return jsonify({"error": "No complaint provided"}), 400
-    # ✅ STEP 1: Direct category detection
+    
     if "hostel" in text:
         result = "Hostel"
     elif "canteen" in text:
@@ -119,27 +118,24 @@ def predict():
     elif "sports" in text:
         result = "Athletics and sports"
 
-    # ✅ STEP 2: Keyword logic
     elif "room" in text:
         result = "Hostel"
     elif "food" in text or "eat" in text:
         result = "Food and Canteen Issues"
 
-    # 🤖 STEP 3: ML fallback (your original code)
+    
     else:
         vect = vectorizer.transform([text])
         result = model.predict(vect)[0]
 
-    # ✅ KEEP THIS SAME
+    
     data = contacts.get(result, {
         "email":"Not Available",
         "phone":"Not Available",
         "image":""
     })
 
-    # =========================
-# STORE IN DATABASE
-# =========================
+    
     time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     conn = sqlite3.connect("complaints.db")
