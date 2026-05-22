@@ -54,7 +54,7 @@ function sendFeedback(value) {
     const text = localStorage.getItem("text");
     const category = localStorage.getItem("category");
 
-    console.log("Sending:", text, category, value);  // 🔥 ADD THIS
+    console.log("Sending:", text, category, value);  
 
     fetch("http://127.0.0.1:5000/feedback", {
         method: "POST",
@@ -69,7 +69,7 @@ function sendFeedback(value) {
     })
     .then(res => res.json())
     .then(data => {
-        console.log("Response:", data); // 🔥 ADD THIS
+        console.log("Response:", data); 
     })
     .catch(err => console.log("Error:", err));
 }
@@ -83,7 +83,7 @@ window.onload = function () {
     if (box) {
         if (feedbackGiven === "true") {
             // AFTER feedback
-            box.innerHTML = "<h3>✅ Thank you for your feedback!</h3>";
+            box.innerHTML = "<h3> Thank you for your feedback!</h3>";
             box.style.pointerEvents = "none";
         } else {
             // BEFORE feedback
@@ -271,7 +271,7 @@ document.getElementById("phoneLink").innerHTML = phoneHTML;
     document.getElementById("descriptionText").innerHTML =
         categoryData[category].description;
 
-    // ✅ EMAIL CLICKABLE (ONLY IN RESULT PAGE)
+    //  EMAIL CLICKABLE (ONLY IN RESULT PAGE)
 let emailList = categoryData[category].email;
 
 if (emailList) {
@@ -283,7 +283,7 @@ if (emailList) {
 }
 
 
-// ✅ PHONE CLICKABLE
+// PHONE CLICKABLE
 let phoneText = categoryData[category].phone || "Not available";
 
 let phones = phoneText.match(/\+?\d[\d\s-]+/g);
@@ -302,7 +302,7 @@ if (phones) {
 document.getElementById("phone").innerHTML = phoneHTML;
 
     if (!window.location.pathname.includes("category.html")) {
-    // ✅ ONLY for result page
+    //  ONLY for result page
     document.body.style.backgroundImage =
         "url('" + categoryData[category].image + "')";
     document.body.classList.add("result-bg");
@@ -323,7 +323,7 @@ function showHistory() {
 
   document.querySelector(".sidebar").classList.remove("active");
 
-  setActive("historyLink");   // 🔥 ADD THIS
+  setActive("historyLink");   
 
   loadHistory();
 }
@@ -336,7 +336,7 @@ function showHome() {
 
   document.querySelector(".sidebar").classList.remove("active");
 
-  setActive("homeLink");   // 🔥 ADD THIS
+  setActive("homeLink");   
 }
 
 function loadHistory() {
@@ -345,7 +345,7 @@ function loadHistory() {
     .then(res => res.json())
     .then(data => {
 
-      // ✅ CHECK if pie chart exists
+      // CHECK if pie chart exists
       const pieCanvas = document.getElementById("complaintChart");
       if (!pieCanvas) return;
 
@@ -367,9 +367,9 @@ function loadHistory() {
           }]
         }
       });
-// =========================
-// 📊 FEEDBACK BAR CHART
-// =========================
+
+// FEEDBACK BAR CHART
+
 fetch("http://127.0.0.1:5000/feedback-stats")
   .then(res => res.json())
   .then(data => {
@@ -404,9 +404,9 @@ fetch("http://127.0.0.1:5000/feedback-stats")
 
   })
   .catch(err => console.log(err));
-      // =========================
-      // 🔥 RECENT COMPLAINTS
-      // =========================
+     
+      //  RECENT COMPLAINTS
+     
       const historyDiv = document.getElementById("historyList");
       historyDiv.innerHTML = "";
 

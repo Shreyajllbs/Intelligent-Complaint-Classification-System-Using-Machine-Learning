@@ -131,9 +131,6 @@ button:hover {
   margin-bottom: 10px;
   color: #00eaff;
 }
-/* ========================= */
-/* ===== ADD BELOW ONLY ==== */
-/* ========================= */
 
 /* Top Navbar */
 .navbar {
@@ -201,7 +198,7 @@ button:hover {
 }
 
 
-/* ===================== RESULT PAGE FINAL DESIGN ===================== */
+/* RESULT PAGE  DESIGN */
 
 /* RESULT PAGE BACKGROUND */
 .result-bg {
@@ -230,7 +227,7 @@ body:has(.result-page) {
   margin-left: 0;   /* remove sidebar space */
 }
 
-/* 🔴 Top Category */
+/*  Top Category */
 .top-category {
   text-align: center;
   margin-bottom: 40px;
@@ -241,7 +238,7 @@ body:has(.result-page) {
   font-weight: 600;
 }
 
-/* 🟡 Main Content Layout */
+/*  Main Content Layout */
 .main-content {
   display: flex;
   justify-content: center;
@@ -264,7 +261,7 @@ body:has(.result-page) {
   margin-bottom: 30px;
 }
 
-/* ⬜ Contact Box */
+/* Contact Box */
 .contact-box {
   background: rgba(255, 255, 255, 0.15);
   padding: 20px;
@@ -284,7 +281,7 @@ body:has(.result-page) {
   font-size: 14px;
 }
 
-/* ⚫ RIGHT SIDE IMAGE */
+/*  RIGHT SIDE IMAGE */
 .right-section {
   flex: 1;
   display: flex;
@@ -293,13 +290,13 @@ body:has(.result-page) {
 
 .right-section img {
   width: 100%;
-  max-width: 550px; /* Bigger image */
+  max-width: 550px; 
   height: auto;
   border-radius: 20px;
   box-shadow: 0 15px 40px rgba(0,0,0,0.4);
 }
 
-/* ================= RESPONSIVE ================= */
+/* RESPONSIVE  */
 
 @media (max-width: 900px) {
   .main-content {
@@ -341,7 +338,7 @@ body:has(.result-page) {
     6px 6px 15px rgba(0,0,0,0.5);
 }
 
-/* ===== SIDEBAR ===== */
+/* SIDEBAR  */
 .sidebar {
   position: fixed;
   top: 0;
@@ -373,7 +370,7 @@ body:has(.result-page) {
   background: #00c6ff;
 }
 
-/* ✅ ACTIVE SIDEBAR LINK */
+/* ACTIVE SIDEBAR LINK */
 .sidebar a.active {
   background: linear-gradient(45deg, #00c6ff, #0072ff);
   color: white;
@@ -436,7 +433,7 @@ body {
 
 .menu-icon {
   position: relative;
-  z-index: 2000; /* higher than sidebar */
+  z-index: 2000; 
 }
 
 #historyList div {
@@ -512,7 +509,7 @@ body {
 
 .sidebar .logo {
   margin-bottom: 15px;
-  margin-top: -20px; /* move only title up */
+  margin-top: -20px; 
 }
 
 @media (max-width: 768px) {
@@ -521,7 +518,7 @@ body {
   }
 }
 
-/* ================= HISTORY PAGE ================= */
+/* HISTORY PAGE  */
 
 
 
@@ -560,19 +557,17 @@ body {
     align-items: center;
   }
 }
-/* FIX NAVBAR FOR RESULT PAGE */
 .result-body .navbar {
   left: 0;
   width: 100%;
   padding: 15px 20px;
 }
 
-/* REMOVE SIDEBAR SPACE FOR CATEGORY PAGE */
 body:has(.result-page) {
   margin-left: 0;
 }
 
-/* ================= CATEGORY PAGE ================= */
+/* CATEGORY PAGE */
 
 .category-page {
   width: 90%;
@@ -594,21 +589,18 @@ body:has(.result-page) {
   color: white;
 }
 
-/* remove sidebar space ONLY for category page */
 body.category-body {
   margin-left: 0;
 }
 
-/* navbar full width ONLY for category */
 .category-body .navbar {
   left: 0;
   width: 100%;
 }
 
 .category-page {
-  width: 95%;              /* takes more screen */
-  max-width: 1500px;      /* allows large screens */
-
+  width: 95%;             
+  max-width: 1500px;     
   margin: 80px auto;
 
   background: rgba(0, 0, 0, 0.25);
@@ -617,11 +609,11 @@ body.category-body {
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 
-  padding: 60px;          /* more inner space */
+  padding: 60px;          
   border-radius: 20px;
 }
 
-/* ================= FEEDBACK BOX ================= */
+/* FEEDBACK BOX  */
 
 .feedback-box {
   position: fixed;
@@ -659,7 +651,7 @@ body.category-body {
   max-width: 800px;
 }
 .category-body {
-  background-image: url("bg.jpeg");  /* same as home */
+  background-image: url("bg.jpeg");  
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
