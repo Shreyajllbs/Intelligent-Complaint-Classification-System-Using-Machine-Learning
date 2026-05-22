@@ -30,10 +30,10 @@ model.fit(X_train_vec, y_train)
 y_pred = model.predict(X_test_vec)
 
 accuracy = accuracy_score(y_test, y_pred)
-print("✅ Model Accuracy:", accuracy)
+print(" Model Accuracy:", accuracy)
 
 
-print("\n📊 Classification Report:\n")
+print("\n Classification Report:\n")
 print(classification_report(y_test, y_pred))
 
 
@@ -41,4 +41,4 @@ os.makedirs("model", exist_ok=True)
 pickle.dump(model, open("model/classifier.pkl","wb"))
 pickle.dump(vectorizer, open("model/vectorizer.pkl","wb"))
 
-print("\n🎯 SVM Model trained & saved successfully")
+print("\n SVM Model trained & saved successfully")
